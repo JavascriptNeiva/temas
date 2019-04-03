@@ -175,13 +175,33 @@ esta es la ultima forma de manejar las funciones asincronas.
 veamos su sintaxis.
 ```js
 let array = [1, 2]
+let promises = []
+for (let i = 3; i < 10; i++) {
+  promises.push(addItemToArrayAsync(array, i))
+}
+
 
 async function addItems () {
   try {
-    let data = await addItemToArrayAsync(array, 3)
+    let data = await Promise.all(promises)
+    console.log(data) // [[1, 2, 3], [1, 2, 3, 4]]
   } catch (e) {
     console.error(e)
   }
 }
 ```
-como podemos observar asyn/await depende de que una funcion tenga la palabra reservada ``` async ```, y para resolver la promesa utilizamos la palabra resevarda ``` await ```
+como podemos observar asyn/await depende de que una funcion tenga la palabra reservada ``` async ```, y para resolver la promesa utilizamos la palabra resevarda ``` await ```.
+
+tambien podemos resolver multiples promesas al tiempo haciendo uso de ``` Promise.all ```
+
+```js
+let array = [1, 2]
+
+const addItems = async (array, item) => {
+  try {
+
+  } catch (e) {
+
+  }
+}
+```
