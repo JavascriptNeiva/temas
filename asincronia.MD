@@ -1,7 +1,7 @@
-# como manejar las asincronia en javascript
+# ¿ Còmo manejar las asincronìa en JavaScript ?
 ## por christian segura
 
-la asincronia es un tema de suma importancia en Javascript, ya que estaremos tratando siempre con ella
+la asincronìa es un tema de suma importancia en Javascript, ya que estaremos tratando siempre con ella
 ya sea manejando un evento en el DOM, realizando peticiones AJAX, o menejando eventos en el servidor con Node.js
 
 existen 3 formas de manejar este comportamiento
@@ -13,13 +13,11 @@ existen 3 formas de manejar este comportamiento
 
 ## CallBacks
 
-un Callback es un funcion que recibe como argumento otra funcion y la ejecuta una vez haya terminado sun funcionamiento.
+un Callback es un funciòn que recibe como argumento otra funciòn y la ejecuta una vez haya terminado sun funcionamiento.
 
-existe un standar/patron para le creacion de callbacks, la cual dice
-que el primer arguemento que se retorna sera un error, en caso tal de
-que hubiese uno, de lo contrarion se retorna null/false
+existe un estàndar/patròn para la creaciòn de callbacks, la cual dice que el primer arguemento que se retorna sera un error, en caso tal de que hubiese uno, de lo contrario se retorna null/false
 
-acontinuacion veremos un pequenio ejemplo
+acontinuaciòn veremos un pequeño ejemplo
 
 ```js
 const addItemToArrayAsync = (array, item, cb) => {
@@ -37,9 +35,9 @@ addItemToArrayAsync(array, 3, (err, data) => {
 })
 ```
 
-como podemos observar la funcion addItemTOArraySync recibe como argumentos un array, un elemento y una funcion, la funcion tiene como primer argumento un error, y como segundo nos devuelve un array con un nuevo elemento.
+como podemos observar la funciòn addItemTOArraySync recibe como argumentos un array, un elemento y una funciòn. la funciòn tiene como primer argumento un error, y como segundo nos devuelve un array con un nuevo elemento.
 
-vamos realizar otro ejemplo con las misma funcion pero esta vez para simular la asincronia, utilizaremos, setTimeOut una funcion del core JavaScript
+vamos realizar otro ejemplo con las misma funciòn pero esta vez para simular la asincronìa, utilizaremos, setTimeOut una funciòn del nucleo de JavaScript.
 
 ```js
 const addItemToArrayAsync = (array, item, cb) => {
@@ -58,7 +56,7 @@ addItemToArrayAsync(array, 3, (err, data) => {
   // after of 5 seconds [1, 2 ,3]
 })
 ```
-ahora vamos el corpontamiento si tuviesemos un callback.
+ahora veremos un ejemplo sin callback.
 ```js
 const addItemToArrayAsync = (array, item) => {
   setTimeout(function () {
@@ -76,14 +74,15 @@ como podemos observar, el comportamiento no es esperado por nosotros
 
 ## Promesas
 
-las promesas son incluyeron de forma nativa en el standar 2015(es6).
-con esto en teoria se viene a solucionar un problema conocido como el callback hell
+las promesas se incluyeron de forma nativa en el estàndar 2015(es6).
 
-el callback hell es como se se daba necesitamos esperar la respuesta asincrona de alguna funcion, y esta a su vez ejecutaba otra funcion asincrona, ...etc
+una de sus fuciones es solucionar un problema conocido como el callback hell.
+
+el callback hell es como se se llama a la andicion de callbacks; esto ocurria cuando necesitamos esperar la respuesta asincrona de alguna funciòn, y esta a su vez ejecuta otra funciòn asincrona, ...etc
 
 ![callback hell image](https://adrianalonso.es/wp-content/uploads/2019/01/streetcallback.png "callback hell image1")
 
-ahora vamos a crear la misma funcionlidad de agregar un elemento a un array de forma asincrona
+ahora vamos a crear la misma funcionlidad de agregar un elemento a un array de forma asincrona, pero usando promesas.
 
 ```js
 const addItemToArrayAsync = (array, element) => {
@@ -98,15 +97,13 @@ const addItemToArrayAsync = (array, element) => {
 }
 ```
 
-como podemos observar crear una promesa es muy diferente a crear un callback.
-
 para crear una promesa disponemos del constructor  ```new Promise```
-que recibe una funcion con dos argumentos, ```reject``` y ``` resolve ```
+que recibe una funciòn con dos argumentos, ```reject``` y ``` resolve ```
 
 ``` reject ``` se utiliza para retornar un error. <br />
-``` resolve ``` se utiliza para retorar la informacion.
+``` resolve ``` se utiliza para retorar la informaciòn.
 
-ahora vamos a ver como se trabajar o resolver una promesa
+ahora veamos como resolver una promesa
 
 ```js
 let array = [1, 2]
@@ -118,10 +115,11 @@ addItemToArrayAsync(array, 3)
 
 ```
 
-para obtener los datos devueltos por una promesa simplemente debemos al metodo ``` then ```, que recibe como parametro una funcion, la cual nos retorna el valor despues de realizar la operacion asincrona. para menejar los errores las promesas nos provee de un  metodo llamado ```  catch ``` el cual espera como argumento o parametro una funcion la cual nos retornara el error.
+para obtener los datos devueltos por una promesa simplemente debemos utilizar el mètodo ``` then ```, que recibe como parametro una funciòn, la cual nos retorna el valor una vez haya concluido con èxito la operacion asìncrona.
 
+para menejar los errores,  las promesas nos provee de un  metodo llamado ```  catch ``` el cual espera como argumento o parametro una funciòn esta nos retornarà el error.
 
-ahora veremos algo un poco mas interesante
+ahora veremos còmo anidar promesas
 
 ```js
 let array = [1, 2]
@@ -137,9 +135,9 @@ addItemToArrayAsync(array, 3)
 })
 ```
 
-en este ejemplo podemos observar como se puede anidar promesas sin que se genere el denominado callback hell, o un promise hell
+en este ejemplo podemos observar còomo se puede anidar promesas sin que se genere el denominado callback hell, o un promise hell
 
-acontinuacion veremos otras formas de realizar este mismo ejemplo. <br />
+acontinuaciòn veremos otras formas de solucionar este mismo problema. <br />
 <strong>arrow function:</strong>
 ```js
 let array = [1, 2]
@@ -171,8 +169,24 @@ Promise.all(promises)
 
 ## Async/Await
 
-esta es la ultima forma de manejar las funciones asincronas.
+èsta es la ùltima forma de manejar las funciones asìncronas.
+
 veamos su sintaxis.
+```js
+let array = [1, 2]
+async function addItems () {
+  try {
+    let data = await addItemToArrayAsync(array, 3)
+    console.log(data) // [1, 2, 3]
+  } catch (e) {
+    console.error(e)
+  }
+}
+```
+como podemos observar async/await depende de una funciòn que tenga la palabra reservada ``` async ```, y para resolver la promesa utilizamos la palabra resevarda ``` await ```.
+
+tambien podemos resolver multiples promesas al tiempo haciendo uso de ``` Promise.all ```
+
 ```js
 let array = [1, 2]
 let promises = []
@@ -190,18 +204,5 @@ async function addItems () {
   }
 }
 ```
-como podemos observar asyn/await depende de que una funcion tenga la palabra reservada ``` async ```, y para resolver la promesa utilizamos la palabra resevarda ``` await ```.
 
-tambien podemos resolver multiples promesas al tiempo haciendo uso de ``` Promise.all ```
-
-```js
-let array = [1, 2]
-
-const addItems = async (array, item) => {
-  try {
-
-  } catch (e) {
-
-  }
-}
-```
+por ùltimo para el manejo de errores podemos utilizar ``` try catch ```.
