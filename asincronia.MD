@@ -10,7 +10,6 @@ existen 3 formas de manejar este comportamiento
 - Promises
 - Async/Await
 
-
 ## CallBacks
 
 un Callback es un funciòn que recibe como argumento otra funciòn y la ejecuta una vez haya terminado sun funcionamiento.
@@ -55,6 +54,7 @@ addItemToArrayAsync(array, 3, (err, data) => {
   console.log(data)
   // after of 5 seconds [1, 2 ,3]
 })
+console.log('hola mundo')
 ```
 ahora veremos un ejemplo sin callback.
 ```js
@@ -92,7 +92,7 @@ const addItemToArrayAsync = (array, element) => {
     }
     seTimeout(() => {
       return resolve(array.push(element))
-    })
+    }, 5000)
   })
 }
 ```
@@ -135,7 +135,7 @@ addItemToArrayAsync(array, 3)
 })
 ```
 
-en este ejemplo podemos observar còomo se puede anidar promesas sin que se genere el denominado callback hell, o un promise hell
+en este ejemplo podemos observar còmo se puede anidar promesas sin que se genere el denominado callback hell, o un promise hell
 
 acontinuaciòn veremos otras formas de solucionar este mismo problema. <br />
 <strong>arrow function:</strong>
@@ -160,7 +160,7 @@ for (let i = 3; i < 10; i++) {
 Promise.all(promises)
 .then(values => {
   console.log(values[0]) // [1, 2, 3]
-  console.log(values[1]) // [1, 2, 3]
+  console.log(values[1]) // [1, 2, 3, 4]
   ...                   //  [1,2 ,3 ...9]
 })
 .catch(err => console.error(err))
